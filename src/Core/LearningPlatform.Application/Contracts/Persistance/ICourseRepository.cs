@@ -8,6 +8,8 @@ using LearningPlatform.Domain;
 namespace LearningPlatform.Application.Contracts.Persistance;
 public interface ICourseRepository : IGenericRepository<Course>
 {
-    public Task<IEnumerable<Course>> GetAllCoursesWithDetail();
-    public Task<Course> GetCourseByIdWithDetailsAsync(Guid id);
+    public Task<IEnumerable<Course>> GetAllCoursesWithDetail(CancellationToken token);
+    public Task<Course> GetCourseByIdWithDetailsAsync(Guid id, CancellationToken token);
+    public Task<IEnumerable<Course>> SearchCoursesByNameAsync(string name, CancellationToken token);
+
 }
