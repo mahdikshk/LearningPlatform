@@ -8,6 +8,7 @@ using LearningPlatform.Domain.Common;
 namespace LearningPlatform.Domain;
 public class Cart : BaseDomainEntity
 {
+    public string User_Id { get; set; } = null!;
     public bool IsPaymentWasSuccessfull { get; set; }
     public ICollection<CartItem>? CartItems { get; set; }
 }

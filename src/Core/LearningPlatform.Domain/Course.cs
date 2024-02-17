@@ -14,8 +14,10 @@ public class Course : BaseDomainEntity
     public int? OriginalPrice { get; set; }
     public bool HasDiscount { get; set; }
     public int? DiscountPercentage { get; set; }
+    public DateTime? DiscountValidUntil { get; set; }
     public Guid Teacher_Id { get; set; }
     public Teacher Teacher { get; set; } = null!;
     public ICollection<Comment>? Comments { get; set; }
     public ICollection<CartItem>? CartItems { get; set;}
+    public ICollection<Topic>? Topics { get; set; }
 }
