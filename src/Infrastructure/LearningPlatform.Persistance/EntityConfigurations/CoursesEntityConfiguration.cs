@@ -13,24 +13,44 @@ internal class CoursesEntityConfiguration : IEntityTypeConfiguration<Course>
     public void Configure(EntityTypeBuilder<Course> builder)
     {
         builder.HasKey(x => x.Id);
+
         builder.Property(x => x.IsFree).HasDefaultValue(true).IsRequired();
+
         builder.Property(x => x.DiscountPercentage).HasDefaultValue(0);
-        builder.Property(x=>x.HasDiscount).HasDefaultValue(false).IsRequired();
+
+        builder.Property(x => x.HasDiscount).HasDefaultValue(false).IsRequired();
+
         builder
             .HasOne(x => x.Teacher)
             .WithMany(x => x.Courses)
             .HasForeignKey(x => x.Teacher_Id)
             .IsRequired();
+
         builder
-            .Property(x=>x.OriginalPrice)
+            .Property(x => x.OriginalPrice)
             .HasDefaultValue(0);
+
         builder.Property(x => x.Name)
             .HasMaxLength(1000);
+
         builder.Property(x => x.Description)
             .HasMaxLength(100_000);
+
         builder
             .HasMany(x => x.Comments)
             .WithOne(x => x.Course)
             .HasForeignKey(x => x.CourseId);
+
+        builder.Property(p => p.DiscountValidUntil).HasDefaultValue(null);
+
+        builder
+            .HasMany(x => x.CartItems)
+            .WithOne(x => x.Course)
+            .HasForeignKey(x => x.Course_Id);
+
+        builder
+            .HasMany(T => T.Topics)
+            .WithOne(X => X.Course)
+            .HasForeignKey(x => x.Course_Id);
     }
 }

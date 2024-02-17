@@ -21,25 +21,29 @@ internal class GenericRepository<T> : IGenericRepository<T> where T : class
         await _context.Set<T>().AddAsync(entity, token);
     }
 
-    public Task AddBatchAsync(IEnumerable<T> entities, CancellationToken token)
+    public async Task AddBatchAsync(IEnumerable<T> entities, CancellationToken token)
     {
-        _context.Set<T>().AddRange(entities);
-        return Task.CompletedTask;
+        await _context.AddRangeAsync(entities: entities, cancellationToken: token);
     }
 
-    public async Task AddBatchAsync(IAsyncEnumerable<T> entities, CancellationToken token)
+    public async ValueTask AddBatchAsync(IAsyncEnumerable<T> entities, CancellationToken token)
     {
         await foreach (var i in entities)
         {
+            if (token.IsCancellationRequested)
+                return;
             await _context.Set<T>().AddAsync(i, cancellationToken: token);
+
         }
     }
 
     public async Task DeleteAsync(Guid id, CancellationToken token)
     {
-        var entity = await GetAsync(id, token);
+        var entity = await GetAsync(id);
         if (entity is not null)
         {
+            if (token.IsCancellationRequested)
+                return;
             _context.Set<T>().Remove(entity);
         }
     }
@@ -50,10 +54,12 @@ internal class GenericRepository<T> : IGenericRepository<T> where T : class
         return Task.CompletedTask;
     }
 
-    public async Task DeleteBatchAsync(IAsyncEnumerable<T> entities,CancellationToken token)
+    public async Task DeleteBatchAsync(IAsyncEnumerable<T> entities, CancellationToken token)
     {
         await foreach (var entity in entities)
         {
+            if (token.IsCancellationRequested)
+                return;
             _context.Remove(entity);
         }
     }
@@ -63,8 +69,8 @@ internal class GenericRepository<T> : IGenericRepository<T> where T : class
         return await _context.Set<T>().ToArrayAsync(token);
     }
 
-    public async ValueTask<T> GetAsync(Guid id, CancellationToken token) =>
-        await _context.Set<T>().FindAsync(new object[] { id }, token);
+    public async ValueTask<T?> GetAsync(Guid id) =>
+        await _context.Set<T>().FindAsync(id);
 
     public Task UpdateAsync(T entity, CancellationToken token)
     {
@@ -82,6 +88,8 @@ internal class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         await foreach (var entity in entities)
         {
+            if (token.IsCancellationRequested)
+                return;
             _context.Update(entity);
         }
     }
