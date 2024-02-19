@@ -8,4 +8,6 @@ using LearningPlatform.Domain;
 namespace LearningPlatform.Application.Contracts.Persistance;
 public interface ICartRepository : IGenericRepository<Cart>
 {
+    ValueTask AddCartItemToCart(CartItem item, CancellationToken cancellationToken);
+    Task DeleteCartItemFromCart(CartItem item, CancellationToken cancellationToken);
 }
