@@ -12,8 +12,7 @@ public static class InfrastructureServiceRegistration
 {
     public static IServiceCollection RegisterInfrastructureServices(this IServiceCollection services)
     {
-        MLContext context = new();
-        services.AddSingleton(context);
+        services.AddSingleton<MLContext>();
         services.AddRequiredPredictionEnginePoolServices();
         return services;
     }

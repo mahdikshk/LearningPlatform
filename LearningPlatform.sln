@@ -19,19 +19,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mobile", "Mobile", "{255D1C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearningPlatform.API", "src\API\LearningPlatform.API\LearningPlatform.API.csproj", "{3FE894C1-0BD5-4C81-8C34-756BAD0CBF71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearningPlatform.Domain", "src\Core\LearningPlatform.Domain\LearningPlatform.Domain.csproj", "{6E43F504-4C34-4F79-9FF8-2B7A6B203AAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearningPlatform.Domain", "src\Core\LearningPlatform.Domain\LearningPlatform.Domain.csproj", "{6E43F504-4C34-4F79-9FF8-2B7A6B203AAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearningPlatform.Application", "src\Core\LearningPlatform.Application\LearningPlatform.Application.csproj", "{3855BBE2-E5E7-47F4-A542-E1B06D4E5D2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearningPlatform.Application", "src\Core\LearningPlatform.Application\LearningPlatform.Application.csproj", "{3855BBE2-E5E7-47F4-A542-E1B06D4E5D2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearninngPlatform.Web", "src\UI\Web\LearninngPlatform.Web\LearninngPlatform.Web\LearninngPlatform.Web.csproj", "{F13CEB04-FB9A-467F-AAB8-F415FAC4733B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearninngPlatform.Web", "src\UI\Web\LearninngPlatform.Web\LearninngPlatform.Web\LearninngPlatform.Web.csproj", "{F13CEB04-FB9A-467F-AAB8-F415FAC4733B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearninngPlatform.Web.Client", "src\UI\Web\LearninngPlatform.Web\LearninngPlatform.Web.Client\LearninngPlatform.Web.Client.csproj", "{D41579EE-3C6C-4EA4-AA0A-BE6EDBAA4BAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearninngPlatform.Web.Client", "src\UI\Web\LearninngPlatform.Web\LearninngPlatform.Web.Client\LearninngPlatform.Web.Client.csproj", "{D41579EE-3C6C-4EA4-AA0A-BE6EDBAA4BAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearningPlatform.Persistance", "src\Infrastructure\LearningPlatform.Persistance\LearningPlatform.Persistance.csproj", "{F0E9690E-104B-4D4C-A961-E6BF0A63D4CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearningPlatform.Persistance", "src\Infrastructure\LearningPlatform.Persistance\LearningPlatform.Persistance.csproj", "{F0E9690E-104B-4D4C-A961-E6BF0A63D4CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearningPlatform.Infrastructure", "src\Infrastructure\LearningPlatform.Infrastructure\LearningPlatform.Infrastructure.csproj", "{ADD23DB0-861C-4A61-9312-1D6C2BA83169}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearningPlatform.Infrastructure", "src\Infrastructure\LearningPlatform.Infrastructure\LearningPlatform.Infrastructure.csproj", "{ADD23DB0-861C-4A61-9312-1D6C2BA83169}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearningPlatform.Identity", "src\Infrastructure\LearningPlatform.Identity\LearningPlatform.Identity.csproj", "{9EA81852-8DDC-4064-A5CB-D28610AEB6CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearningPlatform.Identity", "src\Infrastructure\LearningPlatform.Identity\LearningPlatform.Identity.csproj", "{9EA81852-8DDC-4064-A5CB-D28610AEB6CF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{C38F0AEF-1D25-4BA8-B536-B2EF29A98242}"
 EndProject
