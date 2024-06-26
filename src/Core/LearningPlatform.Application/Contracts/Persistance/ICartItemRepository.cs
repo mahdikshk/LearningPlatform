@@ -8,4 +8,6 @@ using LearningPlatform.Domain;
 namespace LearningPlatform.Application.Contracts.Persistance;
 public interface ICartItemRepository : IGenericRepository<CartItem>
 {
+    Task<IEnumerable<CartItem>> GetAllWithDetailsAsync();
+    
 }

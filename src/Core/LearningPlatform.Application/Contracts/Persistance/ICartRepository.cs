@@ -10,4 +10,5 @@ public interface ICartRepository : IGenericRepository<Cart>
 {
     ValueTask AddCartItemToCart(CartItem item, CancellationToken cancellationToken);
     Task DeleteCartItemFromCart(CartItem item, CancellationToken cancellationToken);
+    Task<IEnumerable<CartItem>> GetAllCartItemsByIdAsync(Guid id, CancellationToken cancellationToken);
 }
