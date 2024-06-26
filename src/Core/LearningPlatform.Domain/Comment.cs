@@ -10,6 +10,6 @@ public class Comment : BaseDomainEntity
 {
     public string Text { get; set; } = null!;
     public string UserId { get; set; } = null!;
-    public Guid CourseId { get; set; }
+    public int CourseId { get; set; }
     public Course Course { get; set; } = null!;
 }
