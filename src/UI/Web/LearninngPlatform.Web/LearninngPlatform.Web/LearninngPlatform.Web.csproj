@@ -8,7 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LearninngPlatform.Web.Client\LearninngPlatform.Web.Client.csproj" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.4" />
+    <PackageReference Include="Blazor.Bootstrap" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.6" />
   </ItemGroup>
 
 </Project>
