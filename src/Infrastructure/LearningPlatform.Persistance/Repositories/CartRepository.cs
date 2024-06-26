@@ -12,11 +12,12 @@ internal class CartRepository(ApplicationDbContext context) : GenericRepository<
     public async ValueTask AddCartItemToCart(CartItem item, CancellationToken cancellationToken)
     {
         await context.AddAsync(item, cancellationToken);
+        await context.SaveChangesAsync(cancellationToken);
     }
 
-    public Task DeleteCartItemFromCart(CartItem item, CancellationToken cancellationToken)
+    public async Task DeleteCartItemFromCart(CartItem item, CancellationToken cancellationToken)
     {
         context.Remove(item);
-        return Task.CompletedTask;
+        await context.SaveChangesAsync(cancellationToken);
     }
 }

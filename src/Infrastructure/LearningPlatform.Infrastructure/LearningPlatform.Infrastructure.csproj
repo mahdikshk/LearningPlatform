@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MailKit" Version="4.6.0" />
+    <PackageReference Include="MailKit" Version="4.5.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
     <PackageReference Include="Microsoft.Extensions.ML" Version="3.0.1" />
     <PackageReference Include="Microsoft.ML" Version="3.0.1" />
-    <PackageReference Include="MimeKit" Version="4.6.0" />
+    <PackageReference Include="MimeKit" Version="4.5.0" />
   </ItemGroup>
 
   <ItemGroup>
