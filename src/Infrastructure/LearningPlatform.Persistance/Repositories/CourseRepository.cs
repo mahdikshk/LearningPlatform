@@ -8,7 +8,7 @@ using LearningPlatform.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace LearningPlatform.Persistance.Repositories;
-internal class CourseRepository : GenericRepository<Course>,ICourseRepository
+internal class CourseRepository : GenericRepository<Course>, ICourseRepository
 {
     private readonly ApplicationDbContext _context;
     public CourseRepository(ApplicationDbContext context) : base(context)
@@ -19,17 +19,17 @@ internal class CourseRepository : GenericRepository<Course>,ICourseRepository
     public async Task<IEnumerable<Course>> GetAllCoursesWithDetail(CancellationToken token)
     {
         return await _context.Courses
-            .Include(x=>x.Teacher)
-            .Include(x=>x.Description)
+            .Include(x => x.Teacher)
+            .Include(x => x.Description)
             .ToListAsync(token);
     }
 
-    public async Task<Course> GetCourseByIdWithDetailsAsync(Guid id, CancellationToken token)
+    public async Task<Course> GetCourseByIdWithDetailsAsync(int id, CancellationToken token)
     {
         return await _context.Courses
-            .Where(x=>x.Id == id)
-            .Include(x=>x.Teacher)
-            .Include(x=>x.Description)
+            .Where(x => x.Id == id)
+            .Include(x => x.Teacher)
+            .Include(x => x.Description)
             .FirstAsync(token);
     }
 

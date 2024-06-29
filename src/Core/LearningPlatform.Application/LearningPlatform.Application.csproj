@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Contracts\Identity\" />
     <Folder Include="Features\Course\Handlers\Commands\" />
     <Folder Include="Features\Course\Requests\Commands\" />
   </ItemGroup>

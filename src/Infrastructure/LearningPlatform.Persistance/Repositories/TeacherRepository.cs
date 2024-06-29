@@ -32,7 +32,7 @@ internal class TeacherRepository(ApplicationDbContext context) : GenericReposito
             .ToArrayAsync(cancellationToken: token);
     }
 
-    public Task<Teacher?> GetTeacherWithDetailsAsync(Guid Id, CancellationToken token)
+    public Task<Teacher?> GetTeacherWithDetailsAsync(int Id, CancellationToken token)
     {
         return context.Teachers
             .Include(t => t.Courses)

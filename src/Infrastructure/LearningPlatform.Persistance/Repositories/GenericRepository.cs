@@ -37,7 +37,7 @@ internal class GenericRepository<T> : IGenericRepository<T> where T : class
         }
     }
 
-    public async Task DeleteAsync(Guid id, CancellationToken token)
+    public async Task DeleteAsync(int id, CancellationToken token)
     {
         var entity = await GetAsync(id);
         if (entity is not null)
@@ -69,7 +69,7 @@ internal class GenericRepository<T> : IGenericRepository<T> where T : class
         return await _context.Set<T>().ToArrayAsync(token);
     }
 
-    public async ValueTask<T?> GetAsync(Guid id) =>
+    public async ValueTask<T?> GetAsync(int id) =>
         await _context.Set<T>().FindAsync(id);
 
     public Task UpdateAsync(T entity, CancellationToken token)

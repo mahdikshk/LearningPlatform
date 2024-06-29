@@ -7,10 +7,12 @@ using LearningPlatform.Application.Contracts.Persistance;
 using LearningPlatform.Domain;
 
 namespace LearningPlatform.Persistance.Repositories;
-internal class CartItemRepository(ApplicationDbContext context) : GenericRepository<CartItem>(context), ICartItemRepository
+internal class WalletRepository : GenericRepository<Wallet>, IWalletRepository
 {
-    public Task<IEnumerable<CartItem>> GetAllWithDetailsAsync()
+    private readonly ApplicationDbContext _context;
+
+    public WalletRepository(ApplicationDbContext context) : base(context)
     {
-        throw new NotImplementedException();
+        _context = context;
     }
 }
