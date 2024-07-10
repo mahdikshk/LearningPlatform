@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using LearningPlatform.Application.Contracts.Persistance;
-using LearningPlatform.Application.DTO.Course;
+using LearningPlatform.Application.DTO.CourseDTOs;
 using LearningPlatform.Application.Features.Course.Requests.Queries;
 using MediatR;
 

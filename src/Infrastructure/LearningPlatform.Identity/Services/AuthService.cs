@@ -10,6 +10,7 @@ using LearningPlatform.Application.Contracts.Identity;
 using LearningPlatform.Application.Models.Identity;
 using LearningPlatform.Identity.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace LearningPlatform.Identity.Services;
@@ -21,11 +22,11 @@ internal class AuthService : IAuthService
 
     public AuthService(SignInManager<ApplicationUser> signInManager,
         UserManager<ApplicationUser> userManager,
-        JwtSettings jwtSettings)
+        IOptions<JwtSettings> jwtSettings)
     {
         _signInManager = signInManager;
         _userManager = userManager;
-        _jwtSettings = jwtSettings;
+        _jwtSettings = jwtSettings.Value;
     }
     public async Task<AuthResponse> Login(AuthRequest request)
     {

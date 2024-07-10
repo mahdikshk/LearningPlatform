@@ -1,4 +1,4 @@
-﻿using LearningPlatform.Application.DTO.Course;
+﻿using LearningPlatform.Application.DTO.CourseDTOs;
 using LearningPlatform.Application.Features.Course.Requests.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -16,7 +16,7 @@ public class CourseController : ControllerBase
         _logger = logger;
         _mediator = mediator;
     }
-
+    [HttpGet("GetAll")]
     public async Task<IActionResult> GetAllCourses()
     {
         var request = new GetAllCoursesRequest();

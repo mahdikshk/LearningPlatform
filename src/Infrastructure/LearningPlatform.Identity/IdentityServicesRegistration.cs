@@ -14,17 +14,19 @@ public static class IdentityServicesRegistration
     public static IServiceCollection RegisterIdentityServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
-        services.AddDbContext<ApplicationIdentityDbContext>(options =>
+        services.AddDbContextPool<ApplicationIdentityDbContext>(options =>
         {
             options.UseSqlServer(configuration[""]);
         });
-        services.AddIdentity<ApplicationUser, IdentityRole>()
+        services.AddIdentity<ApplicationUser, ApplicationRole>()
             .AddEntityFrameworkStores<ApplicationIdentityDbContext>()
             .AddDefaultTokenProviders();
 
         services.AddScoped<IAuthService, AuthService>();
 
         services.AddScoped<IRoleService, RoleService>();
+
+        services.AddScoped<IUserService, UserService>();
 
         return services;
     }

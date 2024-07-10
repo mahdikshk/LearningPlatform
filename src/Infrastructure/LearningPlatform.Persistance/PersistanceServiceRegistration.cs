@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using LearningPlatform.Application.Contracts.Persistance;
 using LearningPlatform.Persistance.Repositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,9 +13,9 @@ public static class PersistanceServiceRegistration
     public static IServiceCollection RegisterPersistanceServices(this IServiceCollection services,
         IConfiguration configuration)
     {
-        services.AddDbContext<ApplicationDbContext>(options =>
+        services.AddDbContextPool<ApplicationDbContext>(options=>
         {
-            options.UseNpgsql(configuration.GetConnectionString("MainDB"));
+            options.UseSqlServer(configuration.GetConnectionString("MainDB"));
         });
 
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));

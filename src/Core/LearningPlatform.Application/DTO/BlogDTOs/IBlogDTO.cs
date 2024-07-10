@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LearningPlatform.Application.DTO.Course;
-public class CourseDTO
+namespace LearningPlatform.Application.DTO.BlogDTOs;
+public interface IBlogDTO
 {
 }
