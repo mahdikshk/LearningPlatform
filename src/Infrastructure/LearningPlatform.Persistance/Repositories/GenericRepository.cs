@@ -16,9 +16,11 @@ internal class GenericRepository<T> : IGenericRepository<T> where T : class
         _context = context;
     }
 
-    public async Task AddAsync(T entity, CancellationToken token)
+    public async Task<T> AddAsync(T entity, CancellationToken token)
     {
         await _context.Set<T>().AddAsync(entity, token);
+        await _context.SaveChangesAsync();
+        return entity;
     }
 
     public async Task AddBatchAsync(IEnumerable<T> entities, CancellationToken token)

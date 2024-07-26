@@ -11,7 +11,7 @@ public interface IGenericRepository<T> where T : class
     public ValueTask<T?> GetAsync(int id);
     public Task DeleteAsync(int id,CancellationToken token);
     public Task UpdateAsync(T entity, CancellationToken token);
-    public Task AddAsync(T entity, CancellationToken token);
+    public Task<T> AddAsync(T entity, CancellationToken token);
     public Task AddBatchAsync(IEnumerable<T> entities, CancellationToken token);
     public ValueTask AddBatchAsync(IAsyncEnumerable<T> entities, CancellationToken token);
     public Task UpdateBatchAsync(IEnumerable<T> entities, CancellationToken token);

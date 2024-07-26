@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LearningPlatform.Application.DTO.BlogCommentDTOs;
-using LearningPlatform.Domain;
 
 namespace LearningPlatform.Application.DTO.BlogDTOs;
-public abstract class IBlogDTO
+public class UpdateBlogDTO : IBlogDTO
 {
+    public string Title { get; set; }
+    public string Text { get; set; }
+    public string Writer_Id { get; set; }
     public int Id { get; set; }
 }
