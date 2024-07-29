@@ -15,6 +15,8 @@ public class ApplicationDbContext : DbContext
     {
 
     }
+    public DbSet<Blog> Blogs { get; set; }
+    public DbSet<BlogComment> BlogComments { get; set; }
     public DbSet<Course> Courses { get; set; }
     public DbSet<Comment> Comments { get; set; }
     public DbSet<Teacher> Teachers { get; set; }

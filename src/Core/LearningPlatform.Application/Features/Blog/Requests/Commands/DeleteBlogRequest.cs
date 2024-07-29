@@ -8,7 +8,7 @@ using LearningPlatform.Application.Response;
 using MediatR;
 
 namespace LearningPlatform.Application.Features.Blog.Requests.Commands;
-public class UpdateBlogRequest : IRequest<BaseCommandResponse>
+public class DeleteBlogRequest : IRequest<BaseCommandResponse>
 {
-    public UpdateBlogDTO UpdateBlogDTO { get; set; }
+    public DeleteBlogDto DeleteBlogDto { get; set; }
 }

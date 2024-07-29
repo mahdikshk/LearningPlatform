@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using FluentValidation;
 
 namespace LearningPlatform.Application.DTO.BlogDTOs.Validators;
-internal class IBlogDtoValidator : AbstractValidator<IBlogDTO>
+internal class DeleteBlogDtoValidator : AbstractValidator<DeleteBlogDto>
 {
-    public IBlogDtoValidator()
+    public DeleteBlogDtoValidator()
     {
-        RuleFor(x=>x.Id).NotNull().NotEmpty().GreaterThan(0);
+        RuleFor(x => x.Id).NotEmpty().NotNull();
     }
 }

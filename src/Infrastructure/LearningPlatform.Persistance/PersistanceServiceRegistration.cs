@@ -44,7 +44,7 @@ public static class PersistanceServiceRegistration
 
         services.AddScoped<IWalletRepository, WalletRepository>();
 
-        services.AddScoped<UnitOfWork>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return services;
     }

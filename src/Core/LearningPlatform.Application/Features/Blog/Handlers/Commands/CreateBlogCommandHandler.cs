@@ -9,9 +9,11 @@ using LearningPlatform.Application.Features.Blog.Requests.Commands;
 using MediatR;
 using LearningPlatform.Application.Contracts.Persistance;
 using AutoMapper;
+using LearningPlatform.Application.DTO.BlogDTOs.Validators;
+using LearningPlatform.Application.Response;
 
 namespace LearningPlatform.Application.Features.Blog.Handlers.Commands;
-internal class CreateBlogCommandHandler : IRequestHandler<CreateBlogRequest,int>
+public class CreateBlogCommandHandler : IRequestHandler<CreateBlogRequest,BaseCommandResponse>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -21,11 +23,27 @@ internal class CreateBlogCommandHandler : IRequestHandler<CreateBlogRequest,int>
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
-    public async Task<int> Handle(CreateBlogRequest request, CancellationToken cancellationToken)
+    public async Task<BaseCommandResponse> Handle(CreateBlogRequest request, CancellationToken cancellationToken)
     {
         var blogrepository = _unitOfWork.BlogRepository;
+        var validator = new CreateBlogDtoValidator();
+        var validationResult = await validator.ValidateAsync(request.BlogDTO,cancellationToken);
+        if(!validationResult.IsValid)
+        {
+            var response = new BaseCommandResponse()
+            {
+                Success = false,
+                Message = "ساخت بلاگ با مشکل مواجه شد",
+                Errors = validationResult.Errors.Select(x => x.ErrorMessage),
+            };
+            return response;
+        }
         var blog = _mapper.Map<Domain.Blog>(request.BlogDTO);
         await blogrepository.AddAsync(blog, cancellationToken);
-        return blog.Id;
+        return new BaseCommandResponse
+        {
+            Id = blog.Id,
+            Success = true,
+        };
     }
 }

@@ -8,4 +8,5 @@ using LearningPlatform.Domain;
 namespace LearningPlatform.Application.Contracts.Persistance;
 public interface IBlogRepository : IGenericRepository<Blog>
 {
+    public Task<IEnumerable<Blog>> GetAllWithDetailsAsync();
 }

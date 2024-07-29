@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using LearningPlatform.Application.Contracts.Persistance;
+using LearningPlatform.Application.DTO.BlogDTOs.Validators;
 using LearningPlatform.Application.Features.Blog.Requests.Commands;
+using LearningPlatform.Application.Response;
 using MediatR;
 
 namespace LearningPlatform.Application.Features.Blog.Handlers.Commands;
-internal class UpdateBlogCommandHandler : IRequestHandler<UpdateBlogRequest>
+public class UpdateBlogCommandHandler : IRequestHandler<UpdateBlogRequest,BaseCommandResponse>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -20,14 +22,30 @@ internal class UpdateBlogCommandHandler : IRequestHandler<UpdateBlogRequest>
         _mapper = mapper;
     }
 
-    public async Task Handle(UpdateBlogRequest request, CancellationToken cancellationToken)
+    public async Task<BaseCommandResponse> Handle(UpdateBlogRequest request, CancellationToken cancellationToken)
     {
         var blogrepo = _unitOfWork.BlogRepository;
+        var validator = new UpdateBlogDtoValidator();
+        var result = await validator.ValidateAsync(request.UpdateBlogDTO, cancellationToken);
+        if (!result.IsValid)
+        {
+            var response = new BaseCommandResponse()
+            {
+                Success = false,
+                Message = "آپدیت کردن بلاگ با مشکل مواجه شده است",
+                Errors = result.Errors.Select(x=>x.ErrorMessage)
+            };
+            return response;
+        }
         var blog = await blogrepo.GetAsync(request.UpdateBlogDTO.Id);
         if (blog is null)
         {
-
-            return;
+            var response = new BaseCommandResponse() 
+            {
+                Success = false,
+                Message = "پستی با این شناسه وجود ندارد",
+            };
+            return response;
         }
         else
         {
@@ -35,5 +53,10 @@ internal class UpdateBlogCommandHandler : IRequestHandler<UpdateBlogRequest>
             blog.Title = request.UpdateBlogDTO.Title;
         }
         await blogrepo.UpdateAsync(blog,cancellationToken);
+        return new BaseCommandResponse()
+        {
+            Success = true,
+            Id = blog.Id,
+        };
     }
 }
