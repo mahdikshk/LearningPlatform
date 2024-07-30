@@ -107,4 +107,15 @@ public class BlogsController : ControllerBase
         if (!result.Success) return BadRequest(result);
         return Ok(result);
     }
+    [HttpPut("DeleteComment")]
+    public async Task<IActionResult> DeleteComment(DeleteBlogCommentDto dto,CancellationToken cancellationToken)
+    {
+        var request = new DeleteBlogCommentRequest
+        {
+            DeleteBlogCommentDto = dto
+        };
+        var result = await _mediator.Send(request,cancellationToken);
+        if (!result.Success) return BadRequest(result);
+        return Ok(result);
+    }
 }
