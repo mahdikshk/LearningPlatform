@@ -40,6 +40,7 @@ public class CreateBlogCommandHandler : IRequestHandler<CreateBlogRequest,BaseCo
         }
         var blog = _mapper.Map<Domain.Blog>(request.BlogDTO);
         await blogrepository.AddAsync(blog, cancellationToken);
+        await _unitOfWork.Save();
         return new BaseCommandResponse
         {
             Id = blog.Id,

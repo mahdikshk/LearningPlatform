@@ -21,4 +21,9 @@ internal class BlogRepository : GenericRepository<Blog>, IBlogRepository
     {
         return await _context.Blogs.Include(x=>x.Comments).ToListAsync();
     }
+
+    public async Task<Blog?> GetByIdWithDetailsAsync(int id)
+    {
+        return await _context.Blogs.Where(x => x.Id == id).Include(x => x.Comments).FirstOrDefaultAsync();
+    }
 }

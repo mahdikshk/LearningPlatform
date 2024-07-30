@@ -42,6 +42,7 @@ public class DeleteBlogCommandHandler : IRequestHandler<DeleteBlogRequest, BaseC
             };
         }
         await repo.DeleteAsync(dto.Id, cancellationToken);
+        await _unitOfWork.Save();
         return new BaseCommandResponse()
         {
             Id = blog.Id,

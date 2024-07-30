@@ -53,6 +53,7 @@ public class UpdateBlogCommandHandler : IRequestHandler<UpdateBlogRequest,BaseCo
             blog.Title = request.UpdateBlogDTO.Title;
         }
         await blogrepo.UpdateAsync(blog,cancellationToken);
+        await _unitOfWork.Save();
         return new BaseCommandResponse()
         {
             Success = true,
