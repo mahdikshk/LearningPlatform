@@ -8,7 +8,7 @@ using LearningPlatform.Application.Response;
 using MediatR;
 
 namespace LearningPlatform.Application.Features.BlogComment.Requests.Commands;
-public class CreateCommentRequest : IRequest<BaseCommandResponse>
+public class CreateBlogCommentRequest : IRequest<BaseCommandResponse>
 {
     public CreateBlogCommentDTO CreateBlogCommentDTO { get; set; }
 }

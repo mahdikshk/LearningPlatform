@@ -14,18 +14,18 @@ using LearningPlatform.Domain;
 using MediatR;
 
 namespace LearningPlatform.Application.Features.BlogComment.Handlers.Commands;
-internal class CreateCommentRequestHandler : IRequestHandler<CreateCommentRequest,BaseCommandResponse>
+internal class CreateBlogCommentRequestHandler : IRequestHandler<CreateBlogCommentRequest,BaseCommandResponse>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
-    public CreateCommentRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public CreateBlogCommentRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
 
-    public async Task<BaseCommandResponse> Handle(CreateCommentRequest request, CancellationToken cancellationToken)
+    public async Task<BaseCommandResponse> Handle(CreateBlogCommentRequest request, CancellationToken cancellationToken)
     {
         var blogRepo = _unitOfWork.BlogRepository;
         var commentRepo = _unitOfWork.BlogCommentRepository;
