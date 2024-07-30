@@ -17,12 +17,16 @@ public class ApplicationDbContext : DbContext
     }
     public DbSet<Blog> Blogs { get; set; }
     public DbSet<BlogComment> BlogComments { get; set; }
-    public DbSet<Course> Courses { get; set; }
-    public DbSet<Comment> Comments { get; set; }
-    public DbSet<Teacher> Teachers { get; set; }
     public DbSet<Cart> Carts { get; set; }
     public DbSet<CartItem> CartItems { get; set; }
-
+    public DbSet<Comment> Comments { get; set; }
+    public DbSet<Course> Courses { get; set; }
+    public DbSet<Podcast> Podcasts { get; set; }
+    public DbSet<Teacher> Teachers { get; set; }
+    public DbSet<Tickets> Tickets { get; set; }
+    public DbSet<Topic> Topics { get; set; }
+    public DbSet<Video> Videos { get; set; }
+    public DbSet<Wallet> Wallets { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
