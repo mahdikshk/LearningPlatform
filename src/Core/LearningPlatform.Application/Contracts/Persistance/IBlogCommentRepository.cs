@@ -8,4 +8,6 @@ using LearningPlatform.Domain;
 namespace LearningPlatform.Application.Contracts.Persistance;
 public interface IBlogCommentRepository : IGenericRepository<BlogComment>
 {
+    public IAsyncEnumerable<BlogComment> GetAllForBlogWithIdStreaming(int blogId);
+    public IAsyncEnumerable<BlogComment> GetAllForBlogWithIdStreamingWithDetails(int blogId);
 }
