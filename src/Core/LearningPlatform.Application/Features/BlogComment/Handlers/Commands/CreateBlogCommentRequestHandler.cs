@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using FluentValidation;
-using LearningPlatform.Application.Contracts.Identity;
 using LearningPlatform.Application.Contracts.Persistance;
 using LearningPlatform.Application.DTO.BlogCommentDTOs;
 using LearningPlatform.Application.DTO.BlogCommentDTOs.Validators;
@@ -19,12 +18,11 @@ internal class CreateBlogCommentRequestHandler : IRequestHandler<CreateBlogComme
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
-    private readonly IUserService _userService;
-    public CreateBlogCommentRequestHandler(IUnitOfWork unitOfWork, IMapper mapper, IUserService userService)
+
+    public CreateBlogCommentRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
-        _userService = userService;
     }
 
     public async Task<BaseCommandResponse> Handle(CreateBlogCommentRequest request, CancellationToken cancellationToken)
@@ -51,7 +49,6 @@ internal class CreateBlogCommentRequestHandler : IRequestHandler<CreateBlogComme
                 Message = "بلاگ وارد شده وجود ندارد"
             };
         }
-        
         var comment = _mapper.Map<Domain.BlogComment>(request.CreateBlogCommentDTO);
         blog.Comments.Add(comment);
         await _unitOfWork.Save();

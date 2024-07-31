@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using FluentValidation;
-using LearningPlatform.Application.DTO;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LearningPlatform.Application;
@@ -13,7 +12,7 @@ public static class ApplicationServiceRegistration
         {
             options.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
         });
-        services.AddValidatorsFromAssemblyContaining<BaseDTO>();
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         return services;
     }
