@@ -10,12 +10,13 @@ using LearningPlatform.Application.Contracts.Persistance;
 using LearningPlatform.Application.DTO.BlogCommentDTOs;
 using LearningPlatform.Application.DTO.BlogCommentDTOs.Validators;
 using LearningPlatform.Application.Features.BlogComment.Requests.Commands;
+using LearningPlatform.Application.Models.Identity;
 using LearningPlatform.Application.Response;
 using LearningPlatform.Domain;
 using MediatR;
 
 namespace LearningPlatform.Application.Features.BlogComment.Handlers.Commands;
-internal class CreateBlogCommentRequestHandler : IRequestHandler<CreateBlogCommentRequest,BaseCommandResponse>
+internal class CreateBlogCommentRequestHandler : IRequestHandler<CreateBlogCommentRequest, BaseCommandResponse>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -33,17 +34,17 @@ internal class CreateBlogCommentRequestHandler : IRequestHandler<CreateBlogComme
         var commentRepo = _unitOfWork.BlogCommentRepository;
         var validator = new CreateBlogCommentDtoValidator();
         var validationresult = await validator.ValidateAsync(request.CreateBlogCommentDTO, cancellationToken);
-        if(!validationresult.IsValid)
+        if (!validationresult.IsValid)
         {
             return new BaseCommandResponse
             {
                 Success = false,
                 Message = "یک یا چند فیلد به اشتباه وارد شده اند",
-                Errors = validationresult.Errors.Select(x=>x.ErrorMessage)
+                Errors = validationresult.Errors.Select(x => x.ErrorMessage)
             };
         }
         var blog = await blogRepo.GetByIdWithDetailsAsync(request.CreateBlogCommentDTO.BlogId);
-        if(blog is null)
+        if (blog is null)
         {
             return new BaseCommandResponse
             {
@@ -51,7 +52,19 @@ internal class CreateBlogCommentRequestHandler : IRequestHandler<CreateBlogComme
                 Message = "بلاگ وارد شده وجود ندارد"
             };
         }
-        
+        var existanceRequest = new UserExistanceRequest()
+        {
+            UserId = request.CreateBlogCommentDTO.UserId
+        };
+        var userExistanceResult = await _userService.GetUserExistanceState(existanceRequest);
+        if (!userExistanceResult.Exists || userExistanceResult.HasError)
+        {
+            return new BaseCommandResponse()
+            {
+                Success = false,
+                Message = "کاربر مورد نظر وجود ندارد"
+            };
+        }
         var comment = _mapper.Map<Domain.BlogComment>(request.CreateBlogCommentDTO);
         blog.Comments.Add(comment);
         await _unitOfWork.Save();

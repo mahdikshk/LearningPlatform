@@ -8,7 +8,7 @@ using LearningPlatform.Domain;
 namespace LearningPlatform.Application.DTO.BlogCommentDTOs;
 public class CreateBlogCommentDTO
 {
-    public int UserId { get; set; }
+    public string UserId { get; set; }
     public int BlogId { get; set; }
     public string Text { get; set; }
 }
