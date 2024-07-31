@@ -8,5 +8,9 @@ using LearningPlatform.Domain.Common;
 namespace LearningPlatform.Domain;
 public class Podcast : BaseDomainEntity
 {
-
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public TimeSpan Duration { get; set; }
+    public string Path { get; set; }
+    public string Author_Id { get; set; }
 }

@@ -5,9 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LearningPlatform.Application.DTO.BlogCommentDTOs;
-public class BlogCommentDTO
+public class GetBlogCommentByIdDTO
 {
-    public string Text { get; set; } = null!;
-    public string UserId { get; set; } = null!;
-    public string UserName { get; set; } = null!;
+    public int Id { get; set; }
 }
