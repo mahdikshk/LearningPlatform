@@ -3,22 +3,24 @@ using LearningPlatform.Application.DTO.BlogDTOs;
 using LearningPlatform.Application.Features.Blog.Requests.Commands;
 using LearningPlatform.Application.Features.Blog.Requests.Queries;
 using LearningPlatform.Application.Features.BlogComment.Requests.Commands;
+using LearningPlatform.Application.Features.BlogComment.Requests.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LearningPlatform.API.Controllers;
 
-[Authorize(Roles = "Writer,Admin")]
+//[Authorize(Roles = "Writer,Admin")]
 [Route("api/[controller]")]
 [ApiController]
 public class BlogsController : ControllerBase
 {
     private readonly IMediator _mediator;
-
-    public BlogsController(IMediator mediator)
+    private readonly ILogger<BlogsController> logger;
+    public BlogsController(IMediator mediator, ILogger<BlogsController> logger)
     {
         _mediator = mediator;
+        this.logger = logger;
     }
 
     [AllowAnonymous]
@@ -32,7 +34,7 @@ public class BlogsController : ControllerBase
 
     [AllowAnonymous]
     [HttpGet("GetWithDetails/{id:int}")]
-    public async Task<IActionResult> GetByIdWithDetails(int id, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetByIdWithDetails([FromRoute]int id, CancellationToken cancellationToken)
     {
         var request = new GetBlogByIdWithDetailsRequest { Id = id };
         var response = await _mediator.Send(request, cancellationToken);
@@ -44,7 +46,7 @@ public class BlogsController : ControllerBase
     }
 
     [HttpDelete("Delete/{id:int}")]
-    public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
+    public async Task<IActionResult> Delete([FromRoute]int id, CancellationToken cancellationToken)
     {
         var request = new DeleteBlogRequest { DeleteBlogDto = new DeleteBlogDto { Id = id } };
         var response = await _mediator.Send(request, cancellationToken);
@@ -77,12 +79,6 @@ public class BlogsController : ControllerBase
         return Ok();
     }
 
-    [HttpGet("GetComments/{BlogId:int}")]
-    public IAsyncEnumerable<BlogCommentDTO> GetComments(int BlogId, CancellationToken cancellationToken)
-    {
-        return null;
-    }
-
     [HttpPost("AddComment")]
     public async Task<IActionResult> AddComment(
         [FromBody] CreateBlogCommentDTO dto,
@@ -108,7 +104,7 @@ public class BlogsController : ControllerBase
         return Ok(result);
     }
     [HttpPut("DeleteComment")]
-    public async Task<IActionResult> DeleteComment(DeleteBlogCommentDto dto,CancellationToken cancellationToken)
+    public async Task<IActionResult> DeleteComment([FromBody] DeleteBlogCommentDto dto,CancellationToken cancellationToken)
     {
         var request = new DeleteBlogCommentRequest
         {
@@ -117,5 +113,16 @@ public class BlogsController : ControllerBase
         var result = await _mediator.Send(request,cancellationToken);
         if (!result.Success) return BadRequest(result);
         return Ok(result);
+    }
+
+    [HttpGet("GetComments/{BlogId:int}")]
+    public IAsyncEnumerable<BlogCommentDTO> GetComments([FromRoute]int BlogId,CancellationToken cancellationToken)
+    {
+        var request = new GetAllBlogCommentsForBlogWithIdStreamingRequest
+        {
+            BlogId = BlogId
+        };
+        var stream = _mediator.CreateStream(request,cancellationToken);
+        return stream;
     }
 }
