@@ -8,6 +8,7 @@ namespace LearningPlatform.Application.Contracts.Persistance;
 public interface IGenericRepository<T> where T : class
 {
     public Task<IEnumerable<T>> GetAllAsync(CancellationToken token);
+    public IAsyncEnumerable<T> GetAllAsyncStreaming(CancellationToken token);
     public ValueTask<T?> GetAsync(int id);
     public Task DeleteAsync(int id,CancellationToken token);
     public Task UpdateAsync(T entity, CancellationToken token);

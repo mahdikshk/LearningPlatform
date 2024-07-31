@@ -71,6 +71,11 @@ internal class GenericRepository<T> : IGenericRepository<T> where T : class
         return await _context.Set<T>().ToArrayAsync(token);
     }
 
+    public IAsyncEnumerable<T> GetAllAsyncStreaming(CancellationToken token)
+    {
+        return _context.Set<T>().AsAsyncEnumerable();
+    }
+
     public async ValueTask<T?> GetAsync(int id) =>
         await _context.Set<T>().FindAsync(id);
 
