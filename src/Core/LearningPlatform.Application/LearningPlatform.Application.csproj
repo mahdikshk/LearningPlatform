@@ -22,6 +22,8 @@
 
   <ItemGroup>
     <Folder Include="DTO\CourseDTOs\Validators\" />
+    <Folder Include="Features\BlogComment\Handlers\Queries\" />
+    <Folder Include="Features\BlogComment\Requests\Queries\" />
     <Folder Include="Features\Course\Handlers\Commands\" />
     <Folder Include="Features\Course\Requests\Commands\" />
   </ItemGroup>
