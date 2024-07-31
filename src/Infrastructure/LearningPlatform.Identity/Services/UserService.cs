@@ -44,7 +44,7 @@ internal class UserService : IUserService
                 return new LockOutResponse()
                 {
                     HasError = true,
-                    ErrorMessage = "کاربر وارد شده وجود ندارد"
+                    Error = "کاربر وارد شده وجود ندارد"
                 };
             }
             var result = await _userManager.SetLockoutEnabledAsync(user, LockOut);
@@ -53,7 +53,7 @@ internal class UserService : IUserService
                 return new LockOutResponse()
                 {
                     HasError = true,
-                    ErrorMessage = "عملیات موفقیت آمیز نبود"
+                    Error = "عملیات موفقیت آمیز نبود"
                 };
             }
 
@@ -62,7 +62,7 @@ internal class UserService : IUserService
                 IsSuccessfull = true
             };
         }
-        else if(request.Email is not null)
+        else if (request.Email is not null)
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
             if (user is null)
@@ -70,7 +70,7 @@ internal class UserService : IUserService
                 return new LockOutResponse()
                 {
                     HasError = true,
-                    ErrorMessage = "کاربری با این ایمیل وجود ندارد"
+                    Error = "کاربری با این ایمیل وجود ندارد"
                 };
             }
             var result = await _userManager.SetLockoutEnabledAsync(user, LockOut);
@@ -79,7 +79,7 @@ internal class UserService : IUserService
                 return new LockOutResponse()
                 {
                     HasError = true,
-                    ErrorMessage = "عملیات با شکست مواجه شده"
+                    Error = "عملیات با شکست مواجه شده"
                 };
             }
 
@@ -93,12 +93,12 @@ internal class UserService : IUserService
         return new LockOutResponse()
         {
             HasError = true,
-            ErrorMessage = "آیدی یا ایمیل معتبر وارد کنید"
+            Error = "آیدی یا ایمیل معتبر وارد کنید"
         };
     }
 
     #endregion
-    
+
     public async Task<UserNameResponse> GetFirstNameAndLastName(UserNameRequest request)
     {
         if (request.Id is not null)
@@ -109,7 +109,7 @@ internal class UserService : IUserService
                 return new UserNameResponse()
                 {
                     HasError = true,
-                    ErrorMessage = "کاربری با این آیدی وجود ندارد"
+                    Error = "کاربری با این آیدی وجود ندارد"
                 };
             }
 
@@ -127,7 +127,7 @@ internal class UserService : IUserService
                 return new UserNameResponse()
                 {
                     HasError = true,
-                    ErrorMessage = "کاربری با این ایمیل وجود ندارد"
+                    Error = "کاربری با این ایمیل وجود ندارد"
                 };
             }
 
@@ -141,9 +141,55 @@ internal class UserService : IUserService
         return new UserNameResponse()
         {
             HasError = true,
-            ErrorMessage = "آیدی یا ایمیل را وارد نمایید"
+            Error = "آیدی یا ایمیل را وارد نمایید"
         };
     }
-    
-    
-}
+
+    public async Task<UserExistanceResponse> GetUserExistanceState(UserExistanceRequest request)
+    {
+        if (request.UserId is not null)
+        {
+            var user = await _userManager.FindByIdAsync(request.UserId);
+            if (user is null)
+            {
+                return new UserExistanceResponse
+                {
+                    Exists = false,
+                    HasError = true,
+                    Error = "کاربر مد نظر وجود ندارد"
+                };
+            }
+            return new UserExistanceResponse
+            {
+                Exists = true,
+                HasError = false
+            };
+        }
+        else if (request.Email is not null)
+        {
+            var user = await _userManager.FindByEmailAsync(request.Email);
+            if (user is null)
+            {
+                return new UserExistanceResponse
+                {
+                    Exists = false,
+                    HasError = true,
+                    Error = "کاربر مد نظر وجود ندارد"
+                };
+            }
+            return new UserExistanceResponse
+            {
+                Exists = true,
+                HasError = false
+            };
+        }
+        else
+        {
+            return new UserExistanceResponse()
+            {
+                HasError = true,
+                Exists = false,
+                Error = "کاربر مد نظر وجود ندارد"
+            };
+        }
+    }

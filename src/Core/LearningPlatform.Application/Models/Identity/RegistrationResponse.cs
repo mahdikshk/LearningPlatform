@@ -4,10 +4,8 @@ using System.Text;
 
 namespace LearningPlatform.Application.Models.Identity
 {
-    public class RegistrationResponse
+    public class RegistrationResponse : BaseResponse
     {
         public string UserId { get; set; }
-        public bool HasError { get; set; }
-        public string Error { get; set; }
     }
 }

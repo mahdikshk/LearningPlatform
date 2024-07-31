@@ -11,4 +11,5 @@ public interface IUserService
     public Task<LockOutResponse> LockUser(LockOutRequest request);
     public Task<LockOutResponse> EndUserLockOut(LockOutRequest request);
     public Task<UserNameResponse> GetFirstNameAndLastName(UserNameRequest request);
+    public Task<UserExistanceResponse> GetUserExistanceState(UserExistanceRequest request);
 }
