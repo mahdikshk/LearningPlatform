@@ -29,15 +29,17 @@ internal class GetAllBlogRequestHandler : IStreamRequestHandler<GetAllBlogsReque
     {
         var repo = _unitOfWork.BlogRepository;
         var blogs = await repo.GetAllAsync(cancellationToken);
+        UserNameRequest userNameRequest = new UserNameRequest();
         foreach (var blog in blogs)
         {
-            UserNameRequest userNameRequest = new UserNameRequest()
-            {
-                Id = blog.Writer_Id
-            };
+            if(cancellationToken.IsCancellationRequested) 
+            { 
+                 yield break;
+            }
+            userNameRequest.Id = blog.Writer_Id;
             var response = await _userService.GetFirstNameAndLastName(userNameRequest);
             var dto = _mapper.Map<BlogDTO>(blog);
-            dto.Writer_Name = response.FirstName + " " + response.LastName;
+            dto.Writer_Name = $"{response.FirstName} {response.LastName}";
             yield return dto;
         }
     }

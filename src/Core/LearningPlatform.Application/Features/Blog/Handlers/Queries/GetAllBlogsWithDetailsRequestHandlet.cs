@@ -31,12 +31,10 @@ internal class GetAllBlogsWithDetailsRequestHandlet : IStreamRequestHandler<GetA
     {
         var repo = _unitOfWork.BlogRepository;
         var blogs = await repo.GetAllWithDetailsAsync();
+        UserNameRequest userNameRequest = new();
         foreach (var blog in blogs)
         {
-            UserNameRequest userNameRequest = new UserNameRequest()
-            {
-                Id = blog.Writer_Id
-            };
+            userNameRequest.Id = blog.Writer_Id;
             var response = await _userService.GetFirstNameAndLastName(userNameRequest);
             var dto = _mapper.Map<BlogDtoWithDetails>(blog);
             dto.Writer_Name = response.FirstName + " " + response.LastName;

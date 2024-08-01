@@ -28,14 +28,12 @@ internal class GetAllBlogCommentsStreamingRequestHandler : IStreamRequestHandler
       CancellationToken cancellationToken)
     {
         var repo = _unitOfWork.BlogCommentRepository;
+        var userNameRequest = new UserNameRequest();
         await foreach (var comment in repo.GetAllAsyncStreaming(cancellationToken))
         {
             if (cancellationToken.IsCancellationRequested)
                 yield break;
-            var userNameRequest = new UserNameRequest()
-            {
-                Id = comment.UserId
-            };
+            userNameRequest.Id = comment.UserId;
             var name = await _userService.GetFirstNameAndLastName(userNameRequest);
             var dto = _mapper.Map<BlogCommentDTO>(comment);
             dto.UserName = name.FirstName + " " + name.LastName;
