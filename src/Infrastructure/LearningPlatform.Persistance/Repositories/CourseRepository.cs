@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using LearningPlatform.Application.Contracts.Persistance;
@@ -24,12 +25,23 @@ internal class CourseRepository : GenericRepository<Course>, ICourseRepository
             .ToListAsync(token);
     }
 
+    public async IAsyncEnumerable<Course> GetAllWithDetailsStreaming([EnumeratorCancellation]CancellationToken cancellationToken)
+    {
+        await foreach (var course in _context.Courses
+            .Include(x => x.Teacher)
+            .AsAsyncEnumerable())
+        {
+            if (cancellationToken.IsCancellationRequested)
+                yield break;
+            yield return course;
+        }
+    }
+
     public async Task<Course> GetCourseByIdWithDetailsAsync(int id, CancellationToken token)
     {
         return await _context.Courses
             .Where(x => x.Id == id)
             .Include(x => x.Teacher)
-            .Include(x => x.Description)
             .FirstAsync(token);
     }
 

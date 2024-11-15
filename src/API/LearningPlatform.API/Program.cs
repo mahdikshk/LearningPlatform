@@ -1,7 +1,11 @@
 using LearningPlatform.Persistance;
 using LearningPlatform.Application;
 using LearningPlatform.Identity;
+using Microsoft.Extensions.Hosting;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
 
 // Add services to the container.
 
@@ -20,7 +24,6 @@ builder.Services.RegisterPersistanceServices(builder.Configuration);
 builder.Services.RegisterApplicationServices();
 
 builder.Services.RegisterIdentityServices(builder.Configuration);
-
 var app = builder.Build();
 
 app.UseHttpLogging();

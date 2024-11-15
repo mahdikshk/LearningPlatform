@@ -10,10 +10,10 @@ using Microsoft.AspNetCore.Identity;
 namespace LearningPlatform.Identity.Services;
 internal class RoleService : IRoleService
 {
-    private readonly RoleManager<ApplicationRole> _roleManager;
+    private readonly RoleManager<IdentityRole> _roleManager;
     private readonly UserManager<ApplicationUser> _userManager;
 
-    public RoleService(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
+    public RoleService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
     {
         _userManager = userManager;
         _roleManager = roleManager;

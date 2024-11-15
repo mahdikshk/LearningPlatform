@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -25,13 +26,13 @@ internal class GetAllBlogCommentsForBlogWithIdStreamingRequestHandler : IStreamR
         _userService = userService;
     }
     public async IAsyncEnumerable<BlogCommentDTO> Handle(GetAllBlogCommentsForBlogWithIdStreamingRequest request,
-        CancellationToken cancellationToken)
+        [EnumeratorCancellation] CancellationToken cancellationToken)
     {
         var repo = _unitOfWork.BlogCommentRepository;
         var userNameRequest = new UserNameRequest();
         await foreach (var comment in repo.GetAllForBlogWithIdStreaming(request.BlogId))
         {
-            if(cancellationToken.IsCancellationRequested)
+            if (cancellationToken.IsCancellationRequested)
                 yield break;
             userNameRequest.Id = comment.UserId;
             var userNameResponse = await _userService.GetFirstNameAndLastName(userNameRequest);

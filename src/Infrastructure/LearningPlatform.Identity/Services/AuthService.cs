@@ -66,7 +66,7 @@ internal class AuthService : IAuthService
         return response;
     }
 
-    public async Task<RegistrationResponse> Register(RegisterationRequest request)
+    public async Task<RegistrationResponse> Register(RegistrationRequest request)
     {
         var existingUser = await _userManager.FindByEmailAsync(request.UserName);
         if (existingUser is not null)
@@ -77,7 +77,7 @@ internal class AuthService : IAuthService
                 Error = "کاربری با ایمیل وارد شما وجود دارد"
             };
         }
-       
+
         var existingEmail = await _userManager.FindByEmailAsync(request.Email);
         if (existingEmail == null)
         {
@@ -93,7 +93,6 @@ internal class AuthService : IAuthService
 
             if (result.Succeeded)
             {
-                await _userManager.AddToRoleAsync(user, "Employee");
                 return new RegistrationResponse() { UserId = user.Id };
             }
             else

@@ -36,7 +36,7 @@ internal class GetAllBlogCommentsStreamingRequestHandler : IStreamRequestHandler
             userNameRequest.Id = comment.UserId;
             var name = await _userService.GetFirstNameAndLastName(userNameRequest);
             var dto = _mapper.Map<BlogCommentDTO>(comment);
-            dto.UserName = name.FirstName + " " + name.LastName;
+            dto.UserName = $"{name.FirstName} {name.LastName}";
             yield return dto;
         }
     }

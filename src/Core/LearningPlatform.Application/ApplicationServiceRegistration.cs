@@ -13,7 +13,7 @@ public static class ApplicationServiceRegistration
         {
             options.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
         });
-        services.AddValidatorsFromAssemblyContaining<BaseDTO>();
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         return services;
     }

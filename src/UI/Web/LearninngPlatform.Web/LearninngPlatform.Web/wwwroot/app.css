@@ -1,31 +1,29 @@
-body {
-    background-color: rgb(13 18 36/1);
-    color: rgb(211 216 232/ 1);
+html{
+    font-size: 62.5%;
+}
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-hr {
+body{
+    font-size: 2rem;
 }
 
-.banner-col {
+a{
+    text-decoration: none;
 }
 
-    .banner-col p {
-        margin: 20px 0 56px;
-        max-width: 376px;
-    }
 
-.linear-btn {
-    background: linear-gradient(87.03deg, #756AF6 16.38%, #CC7DDA 62.94%, #F6BE85 97.64%);
-    border-radius: 5px;
-    color: #fff !important;
-    background-position: left center;
-    background-size: 120% auto;
+.nav{
+
 }
 
-    .linear-btn:hover {
-        background-position: right center;
-    }
+.nav__list{
 
-.linear-btn-all {
-    padding: 13px 31px;
+}
+
+.list{
+    list-style: none;
 }

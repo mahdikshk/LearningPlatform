@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace LearningPlatform.Persistance;
 
@@ -16,6 +17,10 @@ public static class PersistanceServiceRegistration
         services.AddDbContextPool<ApplicationDbContext>(options=>
         {
             options.UseSqlServer(configuration.GetConnectionString("MainDB"));
+            options.LogTo((str) =>
+            {
+
+            },LogLevel.Error);
         });
 
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));

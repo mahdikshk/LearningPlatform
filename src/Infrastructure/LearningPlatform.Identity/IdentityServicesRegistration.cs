@@ -16,9 +16,12 @@ public static class IdentityServicesRegistration
         services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
         services.AddDbContextPool<ApplicationIdentityDbContext>(options =>
         {
-            options.UseSqlServer(configuration[""]);
+            options.UseSqlServer(configuration.GetConnectionString("IdentityDB"));
         });
-        services.AddIdentity<ApplicationUser, ApplicationRole>()
+        services.AddIdentity<ApplicationUser, IdentityRole>(opt =>
+        {
+            opt.Lockout.AllowedForNewUsers = false;
+        })
             .AddEntityFrameworkStores<ApplicationIdentityDbContext>()
             .AddDefaultTokenProviders();
 
@@ -27,7 +30,6 @@ public static class IdentityServicesRegistration
         services.AddScoped<IRoleService, RoleService>();
 
         services.AddScoped<IUserService, UserService>();
-
         return services;
     }
 }

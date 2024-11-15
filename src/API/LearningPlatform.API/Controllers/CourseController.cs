@@ -1,4 +1,5 @@
-﻿using LearningPlatform.Application.DTO.CourseDTOs;
+﻿using System.Runtime.CompilerServices;
+using LearningPlatform.Application.DTO.CourseDTOs;
 using LearningPlatform.Application.Features.Course.Requests.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -17,10 +18,13 @@ public class CourseController : ControllerBase
         _mediator = mediator;
     }
     [HttpGet("GetAll")]
-    public async Task<IActionResult> GetAllCourses()
+    public async IAsyncEnumerable<CourseDTO> GetAllCourses([EnumeratorCancellation]CancellationToken cancellationToken)
     {
-        var request = new GetAllCoursesRequest();
-        var courses = await _mediator.Send(request);
-        return Ok(courses);
+        var request = new GetAllCoursesStreamingRequest();
+        var stream = _mediator.CreateStream(request, cancellationToken);
+        await foreach (var dto in stream)
+        {
+            yield return dto;
+        }
     }
 }

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LearningPlatform.Application.Models.Identity
 {
-    public class RegisterationRequest
+    public class RegistrationRequest
     {
         [Required]
         public string FirstName { get; set; }

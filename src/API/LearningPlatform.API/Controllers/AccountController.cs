@@ -39,7 +39,7 @@ public class AccountController : ControllerBase
     }
 
     [HttpPost("Register")]
-    public async Task<IActionResult> Register(RegisterationRequest request)
+    public async Task<IActionResult> Register(RegistrationRequest request)
     {
         
         var result = await _authService.Register(request);

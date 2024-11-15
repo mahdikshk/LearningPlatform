@@ -9,8 +9,8 @@ using LearningPlatform.Application.Models;
 namespace LearningPlatform.Infrastructure.Mail;
 internal class MailSender : IEmailSender
 {
-    public Task SendEmailAsync(Email email)
+    public async Task SendEmailAsync(Email email)
     {
-        throw new NotImplementedException();
+
     }
 }

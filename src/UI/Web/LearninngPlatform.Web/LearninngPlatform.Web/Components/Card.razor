@@ -1,5 +1,11 @@
-﻿<h3>Card</h3>
+﻿@Header
+
+@Content
+
+@Footer
 
 @code {
-
+    public RenderFragment Header { get; set; }
+    public RenderFragment Content { get; set; }
+    public RenderFragment Footer { get; set; }
 }
