@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 
-namespace LearningPlatform.Persistance.Models;
+namespace LearningPlatform.Domain;
 public class ApplicationUser : IdentityUser
 {
     public string FirstName { get; set; }

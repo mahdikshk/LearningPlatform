@@ -1,8 +1,10 @@
 ﻿using System.Reflection;
+using LearningPlatform.Application.Contracts.Identity;
 using LearningPlatform.Application.Contracts.Persistance;
 using LearningPlatform.Application.Models.Identity;
-using LearningPlatform.Persistance.Models;
+using LearningPlatform.Domain;
 using LearningPlatform.Persistance.Repositories;
+using LearningPlatform.Persistance.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +34,12 @@ public static class PersistanceServiceRegistration
         })
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
+
+        services.AddScoped<IAuthService, AuthService>();
+
+        services.AddScoped<IRoleService, RoleService>();
+
+        services.AddScoped<IUserService, UserService>();
 
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 

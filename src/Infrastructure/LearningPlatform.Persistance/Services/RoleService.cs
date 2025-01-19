@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LearningPlatform.Application.Contracts.Identity;
-using LearningPlatform.Persistance.Models;
+using LearningPlatform.Domain;
 using Microsoft.AspNetCore.Identity;
 
 namespace LearningPlatform.Persistance.Services;

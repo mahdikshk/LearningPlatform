@@ -10,4 +10,5 @@ public class Wallet : BaseDomainEntity
 {
     public int Balance { get; set; } = 0;
     public string UserId { get; set; }
+    public ApplicationUser User { get; set; }
 }

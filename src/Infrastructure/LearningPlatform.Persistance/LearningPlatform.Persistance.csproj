@@ -35,4 +35,8 @@
 		<ProjectReference Include="..\..\Core\LearningPlatform.Domain\LearningPlatform.Domain.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Models\" />
+	</ItemGroup>
+
 </Project>
