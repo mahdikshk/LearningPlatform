@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 
-namespace LearningPlatform.Identity.Models;
-internal class ApplicationUser : IdentityUser
+namespace LearningPlatform.Persistance.Models;
+public class ApplicationUser : IdentityUser
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }

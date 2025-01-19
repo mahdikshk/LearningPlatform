@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 
-namespace LearningPlatform.Identity.Models;
+namespace LearningPlatform.Persistance.Models;
 internal class ApplicationRole : IdentityRole
 {
 }

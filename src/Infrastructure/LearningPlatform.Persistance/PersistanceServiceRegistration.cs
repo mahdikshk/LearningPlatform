@@ -1,7 +1,10 @@
 ﻿using System.Reflection;
 using LearningPlatform.Application.Contracts.Persistance;
+using LearningPlatform.Application.Models.Identity;
+using LearningPlatform.Persistance.Models;
 using LearningPlatform.Persistance.Repositories;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +17,7 @@ public static class PersistanceServiceRegistration
     public static IServiceCollection RegisterPersistanceServices(this IServiceCollection services,
         IConfiguration configuration)
     {
+        services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
         services.AddDbContextPool<ApplicationDbContext>(options=>
         {
             options.UseSqlServer(configuration.GetConnectionString("MainDB"));
@@ -22,6 +26,12 @@ public static class PersistanceServiceRegistration
 
             },LogLevel.Error);
         });
+        services.AddIdentity<ApplicationUser, IdentityRole>(opt =>
+        {
+            opt.Lockout.AllowedForNewUsers = false;
+        })
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
 
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
