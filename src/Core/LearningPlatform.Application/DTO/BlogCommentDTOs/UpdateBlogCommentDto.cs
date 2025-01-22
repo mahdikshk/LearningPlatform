@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LearningPlatform.Application.DTO.BlogCommentDTOs;
-public class UpdateBlogCommentDto
+public class UpdateBlogCommentDto : BaseDTO
 {
-    public int Id { get; set; }
     public string Text { get; set; }
 }

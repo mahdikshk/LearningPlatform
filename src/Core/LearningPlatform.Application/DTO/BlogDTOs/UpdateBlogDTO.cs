@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LearningPlatform.Application.DTO.BlogDTOs;
-public class UpdateBlogDTO : IBlogDTO
+public class UpdateBlogDTO :  IBlogDTO
 {
+    public int Id { get; set; }
     public string Title { get; set; }
     public string Text { get; set; }
     public string Writer_Id { get; set; }
-    public int Id { get; set; }
 }

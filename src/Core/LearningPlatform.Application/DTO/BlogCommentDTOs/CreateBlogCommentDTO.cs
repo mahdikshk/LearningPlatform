@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using LearningPlatform.Domain;
 
 namespace LearningPlatform.Application.DTO.BlogCommentDTOs;
-public class CreateBlogCommentDTO
+public class CreateBlogCommentDTO : BaseDTO
 {
     public string UserId { get; set; }
     public int BlogId { get; set; }
