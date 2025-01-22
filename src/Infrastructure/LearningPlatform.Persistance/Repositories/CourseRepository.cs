@@ -27,7 +27,7 @@ internal class CourseRepository : GenericRepository<Course>, ICourseRepository
 
     public async IAsyncEnumerable<Course> GetAllWithDetailsStreaming([EnumeratorCancellation]CancellationToken cancellationToken)
     {
-        await foreach (var course in _context.Courses
+        await foreach (Course course in _context.Courses
             .Include(x => x.Teacher)
             .AsAsyncEnumerable())
         {

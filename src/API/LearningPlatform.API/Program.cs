@@ -1,6 +1,6 @@
 using LearningPlatform.Persistance;
 using LearningPlatform.Application;
-using LearningPlatform.Identity;
+using LearningPlatform.Persistance;
 using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,8 +22,6 @@ builder.Services.AddHttpLogging(options => { });
 builder.Services.RegisterPersistanceServices(builder.Configuration);
 
 builder.Services.RegisterApplicationServices();
-
-builder.Services.RegisterIdentityServices(builder.Configuration);
 var app = builder.Build();
 
 app.UseHttpLogging();
