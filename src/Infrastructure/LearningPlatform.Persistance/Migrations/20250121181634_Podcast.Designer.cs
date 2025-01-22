@@ -4,6 +4,7 @@ using LearningPlatform.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LearningPlatform.Persistance.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250121181634_Podcast")]
+    partial class Podcast
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -471,17 +474,13 @@ namespace LearningPlatform.Persistance.Migrations
                     b.ToTable("Teachers");
                 });
 
-            modelBuilder.Entity("LearningPlatform.Domain.Ticket", b =>
+            modelBuilder.Entity("LearningPlatform.Domain.Tickets", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Author_Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -497,13 +496,7 @@ namespace LearningPlatform.Persistance.Migrations
                     b.Property<DateTime>("LastModifyDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("Author_Id");
 
                     b.ToTable("Tickets");
                 });
@@ -875,17 +868,6 @@ namespace LearningPlatform.Persistance.Migrations
                     b.Navigation("Author");
                 });
 
-            modelBuilder.Entity("LearningPlatform.Domain.Ticket", b =>
-                {
-                    b.HasOne("LearningPlatform.Domain.ApplicationUser", "Author")
-                        .WithMany("Tickets")
-                        .HasForeignKey("Author_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Author");
-                });
-
             modelBuilder.Entity("LearningPlatform.Domain.Topic", b =>
                 {
                     b.HasOne("LearningPlatform.Domain.Course", "Course")
@@ -981,8 +963,6 @@ namespace LearningPlatform.Persistance.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Podcasts");
-
-                    b.Navigation("Tickets");
 
                     b.Navigation("Wallet")
                         .IsRequired();
