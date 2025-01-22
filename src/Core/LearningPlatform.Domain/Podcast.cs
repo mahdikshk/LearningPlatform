@@ -13,4 +13,5 @@ public class Podcast : BaseDomainEntity
     public TimeSpan Duration { get; set; }
     public string Path { get; set; }
     public string Author_Id { get; set; }
+    public ApplicationUser Author { get; set; }
 }
