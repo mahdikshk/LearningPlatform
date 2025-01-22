@@ -25,14 +25,11 @@ public class BlogsController : ControllerBase
 
     [AllowAnonymous]
     [HttpGet("GetAll")]
-    public async IAsyncEnumerable<BlogDTO> GetAll()
+    public IAsyncEnumerable<BlogDTO> GetAll()
     {
         var request = new GetAllBlogsRequest();
         var stream = _mediator.CreateStream(request);
-        await foreach (var dto in stream)
-        {
-            yield return dto;
-        }
+        return stream;
     }
 
     [AllowAnonymous]
@@ -95,7 +92,6 @@ public class BlogsController : ControllerBase
         if (!result.Success) return BadRequest(result);
         return Ok(result);
     }
-
     [HttpPut("UpdateComment")]
     public async Task<IActionResult> UpdateComment([FromBody] UpdateBlogCommentDto dto, CancellationToken cancellationToken)
     {
@@ -107,7 +103,6 @@ public class BlogsController : ControllerBase
         if (!result.Success) return BadRequest(result);
         return Ok(result);
     }
-
     [HttpPut("DeleteComment")]
     public async Task<IActionResult> DeleteComment([FromBody] DeleteBlogCommentDto dto,CancellationToken cancellationToken)
     {
@@ -121,16 +116,13 @@ public class BlogsController : ControllerBase
     }
 
     [HttpGet("GetComments/{BlogId:int}")]
-    public async IAsyncEnumerable<BlogCommentDTO> GetComments([FromRoute]int BlogId,CancellationToken cancellationToken)
+    public IAsyncEnumerable<BlogCommentDTO> GetComments([FromRoute]int BlogId,CancellationToken cancellationToken)
     {
         var request = new GetAllBlogCommentsForBlogWithIdStreamingRequest
         {
             BlogId = BlogId
         };
         var stream = _mediator.CreateStream(request,cancellationToken);
-        await foreach(var dto in stream)
-        {
-            yield return dto;
-        }
+        return stream;
     }
 }

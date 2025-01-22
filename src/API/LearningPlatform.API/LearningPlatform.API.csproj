@@ -8,19 +8,20 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
+		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.10.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.0" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="7.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Core\LearningPlatform.Application\LearningPlatform.Application.csproj" />
 		<ProjectReference Include="..\..\Core\LearningPlatform.Domain\LearningPlatform.Domain.csproj" />
+		<ProjectReference Include="..\..\Infrastructure\LearningPlatform.Identity\LearningPlatform.Identity.csproj" />
 		<ProjectReference Include="..\..\Infrastructure\LearningPlatform.Infrastructure\LearningPlatform.Infrastructure.csproj" />
 		<ProjectReference Include="..\..\Infrastructure\LearningPlatform.Persistance\LearningPlatform.Persistance.csproj" />
 	</ItemGroup>

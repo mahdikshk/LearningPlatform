@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LearningPlatform.Application.DTO.BlogDTOs;
-public class DeleteBlogDto : BaseDTO
+public class DeleteBlogDto
 {
+    public int Id { get; set; }
 }

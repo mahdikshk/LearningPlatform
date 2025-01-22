@@ -7,7 +7,7 @@ using LearningPlatform.Application.Contracts.Persistance;
 using LearningPlatform.Domain;
 
 namespace LearningPlatform.Persistance.Repositories;
-internal class TicketRepository : GenericRepository<Ticket>, ITicketRepository
+internal class TicketRepository : GenericRepository<Tickets>, ITicketRepository
 {
     private readonly ApplicationDbContext _context;
 

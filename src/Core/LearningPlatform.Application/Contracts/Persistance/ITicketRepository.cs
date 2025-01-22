@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 using LearningPlatform.Domain;
 
 namespace LearningPlatform.Application.Contracts.Persistance;
-public interface ITicketRepository : IGenericRepository<Ticket>
+public interface ITicketRepository : IGenericRepository<Tickets>
 {
 }
