@@ -27,5 +27,9 @@ internal class TeacherEntityConfiguration : IEntityTypeConfiguration<Teacher>
         builder.HasMany(x => x.Courses)
             .WithOne(x => x.Teacher)
             .HasForeignKey(x => x.Teacher_Id);
+
+        builder.HasOne(x => x.TeacherUser)
+            .WithOne(x => x.Teacher)
+            .HasForeignKey<ApplicationUser>(x => x.TeacherId);
     }
 }

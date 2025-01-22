@@ -20,5 +20,9 @@ internal class CartEntityConfiguration : IEntityTypeConfiguration<Cart>
         builder.HasMany(x => x.CartItems)
             .WithOne(x=>x.Cart)
             .HasForeignKey(x=>x.CartId);
+        builder.HasOne(x => x.User)
+            .WithMany(x => x.Carts)
+            .HasForeignKey(x => x.User_Id)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

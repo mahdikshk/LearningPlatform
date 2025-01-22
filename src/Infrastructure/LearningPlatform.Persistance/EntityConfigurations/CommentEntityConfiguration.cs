@@ -17,5 +17,9 @@ internal class CommentEntityConfiguration : IEntityTypeConfiguration<Comment>
         builder.HasOne(x=>x.Course)
             .WithMany(x=>x.Comments)
             .HasForeignKey(x=>x.CourseId);
+        builder.HasOne(x=>x.User)
+            .WithMany(x=>x.Comments)
+            .HasForeignKey(x=>x.UserId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }
