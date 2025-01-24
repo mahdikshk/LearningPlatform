@@ -16,8 +16,6 @@ internal class TeacherEntityConfiguration : IEntityTypeConfiguration<Teacher>
         builder.Property(x => x.Description)
             .HasMaxLength(10_000)
             .IsRequired();
-        builder.Property(x => x.Name)
-            .HasMaxLength(100);
         builder.Property(x => x.TeacherWebsite)
             .HasMaxLength(200);
         builder.Property(x => x.TeacherEmail)
