@@ -21,11 +21,12 @@ internal class CourseRepository : GenericRepository<Course>, ICourseRepository
     {
         return await _context.Courses
             .Include(x => x.Teacher)
-            .Include(x => x.Description)
+            .ThenInclude(x => x.TeacherUser)
+            .Include(x => x.Topics)
             .ToListAsync(token);
     }
 
-    public async IAsyncEnumerable<Course> GetAllWithDetailsStreaming([EnumeratorCancellation]CancellationToken cancellationToken)
+    public async IAsyncEnumerable<Course> GetAllWithDetailsStreaming([EnumeratorCancellation] CancellationToken cancellationToken)
     {
         await foreach (Course course in _context.Courses
             .Include(x => x.Teacher)
