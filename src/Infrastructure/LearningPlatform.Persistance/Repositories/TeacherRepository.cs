@@ -20,14 +20,18 @@ internal class TeacherRepository(ApplicationDbContext context) : GenericReposito
     public async Task<IEnumerable<Teacher>> GetTeachersByNameAsync(string name, CancellationToken token)
     {
         return await context.Teachers
-            .Where(t => t.Name.ToLower().Contains(name.ToLower()))
+            .Include(x => x.TeacherUser)
+            .Where(t => t.TeacherUser.FirstName.ToLower().Contains(name.ToLower())
+            || t.TeacherUser.LastName.ToLower().Contains(name.ToLower()))
             .ToArrayAsync(cancellationToken: token);
     }
 
     public async Task<IEnumerable<Teacher>> GetTeachersByNameWithDetailsAsync(string name, CancellationToken token)
     {
         return await context.Teachers
-            .Where(t => t.Name.ToLower().Contains(name.ToLower()))
+            .Include(x => x.TeacherUser)
+            .Where(t => t.TeacherUser.FirstName.ToLower().Contains(name.ToLower()) ||
+            t.TeacherUser.LastName.ToLower().Contains(name.ToLower()))
             .Include(t => t.Courses)
             .ToArrayAsync(cancellationToken: token);
     }
@@ -35,7 +39,8 @@ internal class TeacherRepository(ApplicationDbContext context) : GenericReposito
     public Task<Teacher?> GetTeacherWithDetailsAsync(int Id, CancellationToken token)
     {
         return context.Teachers
+            .Include(x => x.TeacherUser)
             .Include(t => t.Courses)
-            .FirstOrDefaultAsync(t=>t.Id == Id,cancellationToken: token)!;
+            .FirstOrDefaultAsync(t => t.Id == Id, cancellationToken: token)!;
     }
 }
